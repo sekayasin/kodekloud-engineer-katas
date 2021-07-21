@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx-replicaset
+  labels:
+    app: nginx_app
+    type: front-end
+spec:
+  template:
+    metadata:
+      name: nginx_app
+      labels:
+        app: nginx_app
+        type: front-end
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:latest
+  replicas: 4
+  selector:
+    matchLabels:
+      app: nginx_app
+      type: front-end
