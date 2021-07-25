@@ -1,0 +1,29 @@
+- name: Unzip archive 
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: unzip on app server 1
+    unarchive:
+      src: /usr/src/data/nautilus.zip
+      dest: /opt/data/
+      owner: tony
+      group: tony
+      mode: '0755'
+    when: inventory_hostname == "stapp01"
+  - name: unzip on app server 2
+    unarchive:
+      src: /usr/src/data/nautilus.zip
+      dest: /opt/data/
+      owner: steve
+      group: steve
+      mode: '0755'
+    when: inventory_hostname == "stapp02"
+  - name: unzip on app server 3
+    unarchive:
+      src: /usr/src/data/nautilus.zip
+      dest: /opt/data/
+      owner: banner
+      group: banner
+      mode: '0755'
+    when: inventory_hostname == "stapp03"
