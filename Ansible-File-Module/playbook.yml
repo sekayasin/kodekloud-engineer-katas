@@ -1,0 +1,29 @@
+- name: create a blank file /tmp/nfsdata.txt on all app servers
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: create a blank file /tmp/nfsdata.txt 
+    file:
+      path: "/tmp/nfsdata.txt"
+      state: touch
+      owner: tony
+      group: tony
+      mode: '0655'
+    when: inventory_hostname == "stapp01"
+  - name: create a blank file /tmp/nfsdata.txt 
+    file:
+      path: "/tmp/nfsdata.txt"
+      state: touch
+      owner: steve
+      group: steve
+      mode: '0655'
+    when: inventory_hostname == "stapp02"
+  - name: create a blank file /tmp/nfsdata.txt 
+    file:
+      path: "/tmp/nfsdata.txt"
+      state: touch
+      owner: banner
+      group: banner
+      mode: '0655'
+    when: inventory_hostname == "stapp03"
